@@ -1,0 +1,10 @@
+REPOSITORY                 TAG                        IMAGE ID       CREATED          SIZE
+simplespringbootcrud_app   latest                     b77dc605faea   6 minutes ago    725MB
+<none>                     <none>                     77e66d359819   22 minutes ago   537MB
+mysql                      5.7                        e982339a20a5   2 days ago       452MB
+maven                      3.8.2-eclipse-temurin-17   263b5e3a874d   15 months ago    557MB
+maven                      3.8.2-jdk-8                722b9d50b08a   15 months ago    537MB
+CONTAINER ID   IMAGE                      COMMAND                  CREATED          STATUS                      PORTS     NAMES
+e5e42be8ecdb   simplespringbootcrud_app   "/usr/local/bin/mvn-…"   8 minutes ago    Exited (1) 2 minutes ago              simplespringbootcrud_app_1
+04dda3fc10f8   mysql:5.7                  "docker-entrypoint.s…"   8 minutes ago    Exited (0) 2 minutes ago              simplespringbootcrud_mysqldb_1
+68700dcfc7bb   77e66d359819               "/bin/sh -c 'mvn cle…"   23 minutes ago   Exited (1) 20 minutes ago             pedantic_meitner
