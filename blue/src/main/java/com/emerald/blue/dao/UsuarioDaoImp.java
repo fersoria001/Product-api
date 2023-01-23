@@ -21,8 +21,8 @@ public class UsuarioDaoImp implements UsuarioDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+
 	
-	@SuppressWarnings("unchecked")
 	@Transactional
 	@Override
 	public List<Usuario> getUsuarios(){
@@ -40,18 +40,24 @@ public class UsuarioDaoImp implements UsuarioDao {
 		entityManager.merge(usuario);
 	}
 	@Override
-	public boolean verificarUsuario(Usuario usuario) {
+	public Usuario verificarUsuario(Usuario usuario) {
 		String query = "FROM Usuario WHERE email = :email";
 		List<Usuario> lista = entityManager.createQuery(query)
 				.setParameter("email",usuario.getEmail())
 		 		.getResultList();
+		
 		if(lista.isEmpty()) {
-			return false;
+			return null;
 		}
 		String passwordhashed = lista.get(0).getPassword();
 		
 		Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
-		return argon2.verify(passwordhashed, usuario.getPassword());
+		 if(argon2.verify(passwordhashed, usuario.getPassword())) {
+			 return lista.get(0);
+		 }
+		 else {
+			 return null;
+		 }
 	}
 	
 

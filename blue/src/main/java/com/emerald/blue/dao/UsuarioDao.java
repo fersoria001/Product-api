@@ -9,6 +9,6 @@ public interface UsuarioDao {
 	public List<Usuario> getUsuarios();
 	public void eliminarUsuario(Long id);
 	public void registrarUsuario(Usuario usuario);
-	public boolean verificarUsuario(Usuario usuario);
+	public Usuario verificarUsuario(Usuario usuario);
 }
 
