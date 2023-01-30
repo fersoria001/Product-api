@@ -25,8 +25,8 @@ public class Usuario {
 	private String password;
 	@Column(name= "telefono")
 	private Integer telefono;
-	
-	
+	@Column(name="role")
+	private String role;
 	
 	public Usuario() {}
 	
