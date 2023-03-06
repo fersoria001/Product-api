@@ -24,7 +24,7 @@ public class UsuarioController {
 	
 	
 	@CrossOrigin(origins = "*")
-	@RequestMapping(value = "/usuarios", method = RequestMethod.GET)
+	@RequestMapping(value = "/usuario", method = RequestMethod.GET)
 		public List<Usuario> getUsuarios(){
 			return usuarioService.getUsuarios();
 	}
@@ -42,7 +42,7 @@ public class UsuarioController {
 			usuarioService.saveUsuario(usuario);
 	}
 	@CrossOrigin(origins = "*")
-		@PutMapping("/usuarios")
+		@PutMapping("/usuario")
 		public Usuario modificarUsuario(@RequestBody Usuario usuario, @PathVariable Integer id) {
 			usuarioService.updateUsuario(usuario, id);
 			return usuario;
