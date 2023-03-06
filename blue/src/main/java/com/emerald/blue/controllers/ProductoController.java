@@ -22,21 +22,21 @@ public class ProductoController {
 	@Autowired
 	private ProductoService productoService;
 	
-	@CrossOrigin(origins = "http://localhost:5173")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/producto", method = RequestMethod.GET)
 		public List<Producto> getProductos(){
 			return productoService.getProductos();
 	}
 	
 	
-	@CrossOrigin(origins = "http://localhost:5173")
+	@CrossOrigin(origins = "*")
 	@RequestMapping(value = "/productos/{id}", method = RequestMethod.DELETE)
 		public void eliminarProducto(@PathVariable("productoId") Integer id){
 			productoService.deleteProducto(id);
 	}
 	
 	
-	@CrossOrigin(origins = "http://localhost:5173")
+	@CrossOrigin(origins = "*")
 		@PostMapping("/productos")
 		public Integer guardarProducto(@RequestBody Producto producto){
 			productoService.saveProducto(producto);
@@ -44,7 +44,7 @@ public class ProductoController {
 	}
 	
 	
-	@CrossOrigin(origins = "http://localhost:5173")
+	@CrossOrigin(origins = "*")
 		@PutMapping("/productos")
 		public Producto modificarProducto(@RequestBody Producto producto, @PathVariable Integer id) {
 			productoService.updateProducto(producto, id);

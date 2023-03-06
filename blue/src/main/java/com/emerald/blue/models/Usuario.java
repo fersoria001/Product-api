@@ -83,4 +83,17 @@ public class Usuario {
 	public void setTelefono(Integer telefono) {
 		this.telefono = telefono;
 	}
+
+	@Override
+	public String toString() {
+		return "Usuario{" +
+				"id=" + id +
+				", nombre='" + nombre + '\'' +
+				", apellido='" + apellido + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", telefono=" + telefono +
+				", role='" + role + '\'' +
+				'}';
+	}
 }

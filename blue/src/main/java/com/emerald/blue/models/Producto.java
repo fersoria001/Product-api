@@ -81,6 +81,15 @@ public class Producto {
 		return Objects.equals(id, other.id) && Objects.equals(imgUrl, other.imgUrl)
 				&& Objects.equals(nombre, other.nombre);
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Producto{" +
+				"id=" + id +
+				", nombre='" + nombre + '\'' +
+				", descripcion='" + descripcion + '\'' +
+				", imgUrl='" + imgUrl + '\'' +
+				", precio=" + precio +
+				'}';
+	}
 }
