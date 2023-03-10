@@ -1,16 +1,13 @@
 package com.emerald.blue.models;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 
-@Table(name= "usuarios")
 @Entity
+@Table(name= "usuarios")
 public class Usuario {
 	@Column(name= "id")
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,28 +22,49 @@ public class Usuario {
 	private String password;
 	@Column(name= "telefono")
 	private Integer telefono;
-	@Column(name="role")
-	private String role;
-	
+	@Column(name="enabled")
+	private boolean enabled;
+	private boolean tokenExpired;
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "usuarios_roles",
+			joinColumns = @JoinColumn(
+					name = "usuarios_id", referencedColumnName = "id"),
+			inverseJoinColumns = @JoinColumn(
+					name = "role_id", referencedColumnName = "id"))
+
+	private Collection<Role> roles;
 	public Usuario() {}
-	
+
+	@Override
+	public String toString() {
+		return "Usuario{" +
+				"id=" + id +
+				", nombre='" + nombre + '\'' +
+				", apellido='" + apellido + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", telefono=" + telefono +
+				", enabled=" + enabled +
+				", tokenExpired=" + tokenExpired +
+				", roles=" + roles +
+				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Usuario usuario = (Usuario) o;
+		return id.equals(usuario.id) && Objects.equals(email, usuario.email) && Objects.equals(telefono, usuario.telefono);
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(apellido, email, id, nombre, password, telefono);
+		return Objects.hash(id, email, telefono);
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		return Objects.equals(apellido, other.apellido) && Objects.equals(email, other.email)
-				&& Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(password, other.password) && Objects.equals(telefono, other.telefono);
-	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -84,16 +102,21 @@ public class Usuario {
 		this.telefono = telefono;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuario{" +
-				"id=" + id +
-				", nombre='" + nombre + '\'' +
-				", apellido='" + apellido + '\'' +
-				", email='" + email + '\'' +
-				", password='" + password + '\'' +
-				", telefono=" + telefono +
-				", role='" + role + '\'' +
-				'}';
+
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public void setEnabled(boolean b) {
+		this.enabled = b;
 	}
 }
